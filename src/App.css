@@ -1,0 +1,189 @@
+/* 🔘 BOTÓN / CONTADOR ESTILO PÍLDORA (Basado en temp_image_D157DFC8-2708-419E-8691-E8C2F9EC696A.WEBP) */
+.counter {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 9999px; /* Forma de píldora perfecta como los selectores */
+  color: #ffffff;
+  background-color: #BD1B23; /* Rojo carmesí de la firma */
+  border: 1px solid transparent;
+  transition: background-color 0.2s, transform 0.1s;
+  margin-bottom: 24px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #a3161c; /* Oscurecimiento sutil al pasar el cursor */
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #BD1B23;
+    outline-offset: 2px;
+  }
+}
+
+/* 🏔️ SECCIÓN HERO (Purificada, sin giros 3D extraños, todo plano y limpio) */
+.hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .base,
+  .framework,
+  .vite {
+    position: static; /* Eliminamos el caos de posicionamiento absoluto previo */
+    transition: transform 0.3s ease;
+  }
+
+  /* Ilustraciones o logos limpios uno al lado del otro o integrados */
+  .base {
+    width: 140px;
+    height: auto;
+    z-index: 1;
+  }
+
+  /* Eliminamos las transformaciones tridimensionales complejas para volver al diseño plano */
+  .framework {
+    height: 32px;
+    width: auto;
+    margin-left: -15px; /* Superposición ligera y limpia si es necesaria */
+  }
+
+  .vite {
+    height: 30px;
+    width: auto;
+    margin-left: 10px;
+  }
+}
+
+/* 🎯 CONTENEDOR CENTRAL DE LOGOS/TEXTOS */
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+  background-color: #ffffff; /* Fondo blanco puro siempre */
+
+  @media (max-width: 1024px) {
+    padding: 40px 24px;
+    gap: 20px;
+  }
+}
+
+/* 🏗️ BLOQUES DE ENLACES O PASOS SIGUIENTES (Estructura de grilla limpia) */
+#next-steps {
+  display: flex;
+  border-top: 1px solid #f0f0f0; /* Gris ultra suave texturizado */
+  text-align: left;
+  background-color: #ffffff;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 40px;
+    
+    @media (max-width: 1024px) {
+      padding: 32px 24px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 20px;
+    height: 20px;
+    color: #BD1B23; /* Iconos lineales usando el acento rojo */
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Separador lateral minimalista (temp_image_8F1A5E97-9AD0-4A67-9801-73BD1EEF9BAB.WEBP) */
+#docs {
+  border-right: 1px solid #f0f0f0;
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+/* 🔗 LISTA DE BOTONES RED SOCIAL / DOCUMENTACIÓN (Estilo cápsulas grises de las tarjetas) */
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+  margin: 24px 0 0;
+
+  .logo {
+    height: 16px;
+  }
+
+  a {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 12px; /* Redondeado suave como las cajas de amenidades */
+    background: #f5f5f5; /* Gris muy claro idéntico al fondo del buscador */
+    border: 1px solid #eaeaae/0; 
+    display: flex;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background-color: #eaeaea; /* Tono de los inputs activos */
+      border-color: #neutral-200;
+    }
+    
+    .button-icon {
+      height: 16px;
+      width: 16px;
+      opacity: 0.7;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 12px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+/* ESPACIADORES Y DETALLES LINEALES LIGEROS */
+#spacer {
+  height: 64px;
+  border-top: 1px solid #f0f0f0;
+  
+  @media (max-width: 1024px) {
+    height: 40px;
+  }
+}
+
+/* Eliminamos los "ticks" decorativos pesados que rompen la limpieza visual */
+.ticks {
+  display: none;
+}
