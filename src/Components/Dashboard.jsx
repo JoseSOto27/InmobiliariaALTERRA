@@ -250,14 +250,13 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
       {/* 🕋 BARRA LATERAL (SIDEBAR): COLOR ANTRACITA MATE INTEGRAL DE LA MARCA */}
       <aside className="w-full md:w-72 bg-[#1A1A1A] p-6 flex flex-col justify-between shadow-lg z-20 shrink-0 border-r border-neutral-800">
         <div>
-          {/* Isotipo y Título de Marca Horizontal */}
-          <div className="flex items-center gap-2.5 mb-10 border-b border-neutral-800 pb-6">
-            <div className="w-6 h-6 bg-[#BD1B23] rounded-[5px] flex items-center justify-center relative overflow-hidden">
-              <div className="w-2.5 h-2.5 bg-white rotate-45 mt-2.5"></div>
-            </div>
-            <span className="font-sans font-medium text-sm tracking-tight text-white">
-              castroagustin<span className="text-neutral-500 font-light">.com.ar</span>
-            </span>
+          {/* Logotipo Comercial en Escala de Grises Monocromática (Blanco y Negro) */}
+          <div className="flex justify-start mb-10 border-b border-neutral-800 pb-6">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="h-9 w-auto object-contain brightness-0 invert opacity-90" 
+            />
           </div>
           
           <p className="text-[10px] font-semibold text-neutral-500 uppercase tracking-wider mb-4 px-2">Administración</p>
@@ -576,5 +575,5 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
 
       </main>
     </div>
-  );
+  ); 
 }
