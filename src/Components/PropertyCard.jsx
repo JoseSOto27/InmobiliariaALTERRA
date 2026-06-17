@@ -13,7 +13,8 @@ export default function PropertyCard({ property, onClick }) {
     if (onClick) onClick();
   };
 
-  const esCarro = property.categoria === 'Carro';
+  const esCarro = property.categoria === 'Vehículo de Gama';
+  const esTerreno = property.categoria === 'Terreno Comercial' || property.categoria === 'Terreno Residencial';
 
   return (
     <article 
@@ -29,10 +30,21 @@ export default function PropertyCard({ property, onClick }) {
           loading="lazy"
         />
         
-        {/* 🏷️ ETIQUETA DINÁMICA CORREGIDA A .categoria */}
-        {(property.categoria || property.tag || property.esquema) && (
-          <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#333333] font-medium text-[11px] px-3 py-1 rounded-full shadow-sm border border-neutral-200/40 tracking-tight">
-            {property.categoria || property.tag || property.esquema}
+        {/* 🏷️ ETIQUETA IZQUIERDA: Categoría de Alta (Casa Residencial, Terreno Residencial, etc.) */}
+        {(property.categoria || property.tag) && (
+          <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#333333] font-medium text-[11px] px-3 py-1 rounded-full shadow-sm border border-neutral-200/40 tracking-tight z-10">
+            {property.categoria || property.tag}
+          </span>
+        )}
+
+        {/* 🏷️ NUEVA ETIQUETA DERECHA: Esquema Comercial (Venta / Preventa / Renta) */}
+        {property.esquema && (
+          <span className={`absolute top-4 right-4 backdrop-blur-sm text-white font-semibold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm z-10 border border-white/10
+            ${property.esquema === 'Venta' ? 'bg-[#BD1B23]/90' : ''}
+            ${property.esquema === 'Preventa' ? 'bg-amber-600/90' : ''}
+            ${property.esquema === 'Renta' ? 'bg-neutral-900/90' : ''}
+          `}>
+            {property.esquema}
           </span>
         )}
       </div>
@@ -80,8 +92,8 @@ export default function PropertyCard({ property, onClick }) {
             </>
           ) : (
             <>
-              {/* 1. Habitaciones (Cama) */}
-              {property.categoria !== 'Terreno' && property.categoria !== 'Terreno Residencial' && (
+              {/* 1. Habitaciones */}
+              {!esTerreno && (
                 <div className="flex items-center gap-1 border border-neutral-200/60 rounded-lg px-2.5 py-1 flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4M4 12v6m0-6V6m16 6v6m0-6V6" />
@@ -90,8 +102,8 @@ export default function PropertyCard({ property, onClick }) {
                 </div>
               )}
 
-              {/* 2. Baños (Tina / Regadera) */}
-              {property.categoria !== 'Terreno' && property.categoria !== 'Terreno Residencial' && (
+              {/* 2. Baños */}
+              {!esTerreno && (
                 <div className="flex items-center gap-1 border border-neutral-200/60 rounded-lg px-2.5 py-1 flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8" />
@@ -100,8 +112,8 @@ export default function PropertyCard({ property, onClick }) {
                 </div>
               )}
 
-              {/* 3. Estacionamiento (Coche / Cochera) */}
-              {property.categoria !== 'Terreno' && property.categoria !== 'Terreno Residencial' && (
+              {/* 3. Estacionamiento */}
+              {!esTerreno && (
                 <div className="flex items-center gap-1 border border-neutral-200/60 rounded-lg px-2.5 py-1 flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -110,7 +122,7 @@ export default function PropertyCard({ property, onClick }) {
                 </div>
               )}
 
-              {/* 4. Metros Construidos (Regla de planos) */}
+              {/* 4. Metros Construidos */}
               {property.areaConst > 0 && (
                 <div className="flex items-center gap-1 border border-neutral-200/60 rounded-lg px-2.5 py-1 flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
@@ -120,7 +132,7 @@ export default function PropertyCard({ property, onClick }) {
                 </div>
               )}
 
-              {/* 5. Metros de Terreno (Límites / Escuadras) */}
+              {/* 5. Metros de Terreno */}
               {property.areaTerreno > 0 && (
                 <div className="flex items-center gap-1 border border-neutral-200/60 rounded-lg px-2.5 py-1 bg-neutral-50/60 flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
