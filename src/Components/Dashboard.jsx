@@ -250,8 +250,8 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
       {/* 🕋 BARRA LATERAL (SIDEBAR): COLOR ANTRACITA MATE INTEGRAL DE LA MARCA */}
       <aside className="w-full md:w-72 bg-[#1A1A1A] p-6 flex flex-col justify-between shadow-lg z-20 shrink-0 border-r border-neutral-800">
         <div>
-          {/* Logotipo Comercial en Escala de Grises Monocromática (Blanco y Negro) */}
-          <div className="flex justify-start mb-10 border-b border-neutral-800 pb-6">
+          {/* Logotipo Comercial Centrado en Escala de Grises Monocromática */}
+          <div className="flex justify-center mb-10 border-b border-neutral-800 pb-6">
             <img 
               src="/logo.png" 
               alt="Logo" 
