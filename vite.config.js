@@ -19,7 +19,7 @@ export default defineConfig({
         icons: [
           {
             // Usamos tu logo.png directo como icono universal
-            src: 'logo.png',
+            src: 'favicon.svg', // Puedes generar un favicon.svg a partir de tu logo.png para mejor compatibilidad
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any maskable'
