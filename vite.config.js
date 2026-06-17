@@ -6,30 +6,21 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate', // Actualiza los archivos en segundo plano automáticamente
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'logo.png'], // Incluimos tus assets actuales
       manifest: {
         name: 'Alterra Haus Inmobiliaria',
         short_name: 'AlterraHaus',
         description: 'Panel administrativo y catálogo unificado de propiedades',
-        theme_color: '#1A1A1A', // Color de la barra de estado del celular (coincide con tu sidebar)
-        background_color: '#FFFFFF', // Fondo al abrir la app
-        display: 'standalone', // Oculta las barras del navegador web para que parezca app nativa
+        theme_color: '#1A1A1A',
+        background_color: '#FFFFFF',
+        display: 'standalone',
         orientation: 'portrait',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            // Usamos tu logo.png directo como icono universal
+            src: 'logo.png',
             sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
           }
