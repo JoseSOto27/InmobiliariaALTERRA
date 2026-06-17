@@ -101,7 +101,7 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 border-b border-neutral-100 pb-5 text-left">
                   <div>
                     <h2 className="text-2xl sm:text-3xl font-light text-[#333333] tracking-tight">
-                      Propiedades <span className="text-[#BD1B23] font-medium">destacadas</span>
+                      Propiedades <span className="text-[#BD1B23] font-medium">Destacadas</span>
                     </h2>
                     <p className="text-sm text-neutral-400 font-light mt-1">
                       Explora nuestra selección exclusiva de inmuebles disponibles.

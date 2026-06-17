@@ -56,9 +56,6 @@ export default function Footer() {
             <li>
               <a href="#sobre-nosotros" className="hover:text-[#BD1B23] transition-colors">Sobre nosotros</a>
             </li>
-            <li>
-              <a href="#tasacion" className="hover:text-[#BD1B23] transition-colors">Tasación</a>
-            </li>
           </ul>
         </div>
 
@@ -79,7 +76,7 @@ export default function Footer() {
             <li className="pt-1">
               {/* Botón tipo cápsula gris oscuro idéntico a las amenidades del feed */}
               <a 
-                href="https://wa.me/521111234567" 
+                href="https://wa.me/7751599597" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="font-medium text-xs text-white bg-neutral-800 hover:bg-neutral-700 border border-neutral-700/50 px-5 py-2.5 rounded-full transition-colors inline-block tracking-tight"

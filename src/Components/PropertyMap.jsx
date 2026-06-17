@@ -1,8 +1,6 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-
-// Corrección de bug de Leaflet con entornos empaquetados
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -15,18 +13,14 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 export default function PropertyMap({ properties }) {
-  {/* 📍 COORDENADAS EXACTAS ENFOCADAS EN TULANCINGO, HIDALGO CON ZOOM LOCAL OPTIMIZADO */}
   const centerPosition = [20.0841, -98.3690]; 
   const initialZoom = 11;
 
   return (
-    /* CONTENEDOR TOTALMENTE BLANCO Y LIMPIO */
     <section className="bg-white py-12 px-4 sm:px-6 lg:px-8 my-4">
-      
-      {/* BLOQUE DE ENCABEZADO INTEGRADO CON EL ESTILO DEL CONTENIDO */}
       <div className="max-w-7xl mx-auto mb-8 text-left">
         <h2 className="font-sans text-2xl sm:text-3xl font-light text-[#333333] tracking-tight">
-          Propiedades <span className="text-[#BD1B23] font-medium">destacadas en el mapa</span>
+          Propiedades <span className="text-[#BD1B23] font-medium">en el Mapa</span>
         </h2>
         <p className="font-sans text-neutral-400 text-sm mt-1.5 font-light">
           Navega y ubica de manera visual las residencias disponibles en tu zona.
