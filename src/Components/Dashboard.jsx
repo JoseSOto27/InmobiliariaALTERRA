@@ -11,8 +11,9 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
   const [citas, setCitas] = useState([]);
   const [loadingCitas, setLoadingCitas] = useState(false);
 
+  // Inicializado con el nombre exacto de la categoría premium
   const [formData, setFormData] = useState({
-    categoria: 'Casa', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', 
+    categoria: 'Casa Residencial', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', 
     images: [], 
     lat: '', lng: '', beds: '', baths: '', parking: '', areaConst: '', areaTerreno: '', brand: '', modelYear: '', kms: '', transmission: 'Automática',
     carColor: 'Blanco', interiorColor: 'Negro'
@@ -107,7 +108,7 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
     setIsEditing(true);
     setCurrentId(item.id);
     setFormData({
-      categoria: item.categoria || 'Casa',
+      categoria: item.categoria || 'Casa Residencial',
       esquema: item.esquema || 'Venta',
       title: item.title,
       location: item.location,
@@ -170,8 +171,9 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
         finalStorageUrls.push(publicUrlData.publicUrl);
       }
 
+      {/* 📥 PAYLOAD CONFIGURADO PARA GUARDAR TEXTOS LARGOS EXACTOS */}
       const itemPayload = {
-        categoria: formData.categoria,
+        categoria: formData.categoria, 
         esquema: formData.esquema,
         title: formData.title,
         location: formData.location,
@@ -180,15 +182,10 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
         tag: formData.tag,
         image: finalStorageUrls[0],
         images: finalStorageUrls,
-        coordinates: [parseFloat(formData.lat) || 20.0841, parseFloat(formData.lng) || -98.3690], // Sincronizado por defecto a Tulancingo, Hgo
-        ...((formData.categoria !== 'Carro' && formData.categoria !== 'Terreno' && formData.categoria !== 'Terreno Residencial') ? {
-          beds: parseInt(formData.beds) || 0,
-          baths: parseFloat(formData.baths) || 0,
-          parking: parseInt(formData.parking) || 0,
-          areaConst: parseInt(formData.areaConst) || 0,
-          areaTerreno: parseInt(formData.areaTerreno) || 0,
-          brand: null, modelYear: null, kms: null, transmission: null, carColor: null, interiorColor: null
-        } : formData.categoria === 'Carro' ? {
+        coordinates: [parseFloat(formData.lat) || 20.0841, parseFloat(formData.lng) || -98.3690],
+        
+        // Validación de campos nulos/activos basada en la selección exacta de IMG_7503.JPG
+        ...(formData.categoria === 'Vehículo de Gama' ? {
           brand: formData.brand,
           modelYear: formData.modelYear,
           kms: parseInt(formData.kms) || 0,
@@ -196,10 +193,17 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
           carColor: formData.carColor,
           interiorColor: formData.interiorColor,
           beds: null, baths: null, parking: null, areaConst: null, areaTerreno: null
-        } : {
-          // Lógica adaptada para Terrenos (Comerciales o Residenciales)
+        } : (formData.categoria === 'Terreno Comercial' || formData.categoria === 'Terreno Residencial') ? {
           areaTerreno: parseInt(formData.areaTerreno) || 0,
           beds: null, baths: null, parking: null, areaConst: null, brand: null, modelYear: null, kms: null, transmission: null, carColor: null, interiorColor: null
+        } : {
+          // Lógica para Casa Residencial o Departamento Premium
+          beds: parseInt(formData.beds) || 0,
+          baths: parseFloat(formData.baths) || 0,
+          parking: parseInt(formData.parking) || 0,
+          areaConst: parseInt(formData.areaConst) || 0,
+          areaTerreno: parseInt(formData.areaTerreno) || 0,
+          brand: null, modelYear: null, kms: null, transmission: null, carColor: null, interiorColor: null
         })
       };
 
@@ -216,7 +220,7 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
       }
 
       setFormData({
-        categoria: 'Casa', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', images: [], lat: '', lng: '', beds: '', baths: '', parking: '', areaConst: '', areaTerreno: '', brand: '', modelYear: '', kms: '', transmission: 'Automática', carColor: 'Blanco', interiorColor: 'Negro'
+        categoria: 'Casa Residencial', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', images: [], lat: '', lng: '', beds: '', baths: '', parking: '', areaConst: '', areaTerreno: '', brand: '', modelYear: '', kms: '', transmission: 'Automática', carColor: 'Blanco', interiorColor: 'Negro'
       });
       setIsEditing(false);
       setCurrentId(null);
@@ -234,16 +238,17 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
     setIsEditing(false);
     setCurrentId(null);
     setFormData({
-      categoria: 'Casa', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', images: [], lat: '', lng: '', beds: '', baths: '', parking: '', areaConst: '', areaTerreno: '', brand: '', modelYear: '', kms: '', transmission: 'Automática', carColor: 'Blanco', interiorColor: 'Negro'
+      categoria: 'Casa Residencial', esquema: 'Venta', title: '', location: '', price: '', description: '', tag: 'Entrega Inmediata', images: [], lat: '', lng: '', beds: '', baths: '', parking: '', areaConst: '', areaTerreno: '', brand: '', modelYear: '', kms: '', transmission: 'Automática', carColor: 'Blanco', interiorColor: 'Negro'
     });
     setSeccionActiva('inventario');
   };
 
+  // Filtros del inventario sincronizados con los nombres extendidos de Supabase
   const filteredProperties = properties.filter(p => {
     if (tabFiltro === 'Todos') return true;
-    if (tabFiltro === 'Inmuebles') return p.categoria !== 'Carro';
-    if (tabFiltro === 'Terreno') return p.categoria === 'Terreno' || p.categoria === 'Terreno Residencial';
-    if (tabFiltro === 'Carros') return p.categoria === 'Carro';
+    if (tabFiltro === 'Inmuebles') return p.categoria !== 'Vehículo de Gama';
+    if (tabFiltro === 'Terreno') return p.categoria === 'Terreno Comercial' || p.categoria === 'Terreno Residencial';
+    if (tabFiltro === 'Carros') return p.categoria === 'Vehículo de Gama';
     return p.categoria === tabFiltro;
   });
 
@@ -331,7 +336,6 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
                         </span>
                       </td>
                       <td className="py-4 text-neutral-500">{item.esquema}</td>
-                      {/* Sincronizado a formato en-US con comas */}
                       <td className="py-4 font-semibold text-[#333333]">MXN ${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(item.price)}</td>
                       <td className="py-4">
                         <div className="flex justify-center gap-2 px-4">
@@ -377,13 +381,13 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
                 <div>
                   <label className="block text-xs font-semibold text-[#BD1B23] mb-1.5 pl-2">Segmentación</label>
                   <div className="relative">
-                    {/* 🌟 AGREGADA OPCIÓN TERRENO RESIDENCIAL */}
+                    {/* 🌟 COINCIDENCIA DE VALORES AL 100% CON REQUERIMIENTO VISUAL */}
                     <select name="categoria" value={formData.categoria} onChange={handleChange} className="w-full bg-[#F5F5F5] text-[#333333] text-sm rounded-full py-2.5 px-4 appearance-none outline-none border border-transparent focus:border-neutral-200 transition-colors cursor-pointer font-normal">
-                      <option value="Casa">Casa Residencial</option>
-                      <option value="Departamento">Departamento Premium</option>
-                      <option value="Terreno">Terreno Comercial</option>
+                      <option value="Casa Residencial">Casa Residencial</option>
+                      <option value="Departamento Premium">Departamento Premium</option>
+                      <option value="Terreno Comercial">Terreno Comercial</option>
                       <option value="Terreno Residencial">Terreno Residencial</option>
-                      <option value="Carro">Vehículo de Gama</option>
+                      <option value="Vehículo de Gama">Vehículo de Gama</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400 text-[10px]">▼</div>
                   </div>
@@ -418,7 +422,7 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
               </div>
 
               {/* Secciones Condicionales Moduladas */}
-              {formData.categoria === 'Carro' ? (
+              {formData.categoria === 'Vehículo de Gama' ? (
                 <div key="car-section" className="p-4 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-4 animate-fadeIn">
                   <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Especificaciones del motor</p>
                   <div className="grid grid-cols-2 gap-3">
@@ -435,8 +439,8 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
               ) : (
                 <div key="inmo-section" className="p-4 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-4 animate-fadeIn">
                   <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Atributos arquitectónicos</p>
-                  {/* Se oculta para Terreno y Terreno Residencial */}
-                  {formData.categoria !== 'Terreno' && formData.categoria !== 'Terreno Residencial' && (
+                  {/* Se oculta inteligentemente para ambos tipos de terrenos */}
+                  {formData.categoria !== 'Terreno Comercial' && formData.categoria !== 'Terreno Residencial' && (
                     <div className="grid grid-cols-3 gap-3 text-center">
                       <div><label className="text-neutral-400 text-[11px] block mb-1">Habitaciones</label><input type="number" name="beds" value={formData.beds} onChange={handleChange} className="w-full p-2 bg-white border border-neutral-200/60 rounded-xl text-center outline-none font-normal" /></div>
                       <div><label className="text-neutral-400 text-[11px] block mb-1">Baños</label><input type="number" step="0.5" name="baths" value={formData.baths} onChange={handleChange} className="w-full p-2 bg-white border border-neutral-200/60 rounded-xl text-center outline-none font-normal" /></div>
@@ -445,7 +449,7 @@ export default function Dashboard({ properties, onAddProperty, onUpdateProperty,
                   )}
                   <div className="grid grid-cols-2 gap-3">
                     <div><label className="text-neutral-400 text-[11px] block mb-1 pl-1">M² Superficie</label><input type="number" name="areaTerreno" value={formData.areaTerreno} onChange={handleChange} className="w-full p-2 bg-white border border-neutral-200/60 rounded-xl outline-none font-normal" /></div>
-                    {formData.categoria !== 'Terreno' && formData.categoria !== 'Terreno Residencial' && (
+                    {formData.categoria !== 'Terreno Comercial' && formData.categoria !== 'Terreno Residencial' && (
                       <div><label className="text-neutral-400 text-[11px] block mb-1 pl-1">M² Construidos</label><input type="number" name="areaConst" value={formData.areaConst} onChange={handleChange} className="w-full p-2 bg-white border border-neutral-200/60 rounded-xl outline-none font-normal" /></div>
                     )}
                   </div>
