@@ -217,7 +217,7 @@ export default function PropertyModal({ property, onClose }) {
             </button>
 
             <a 
-              href={`https://wa.me/521111234567?text=${whatsappMessage}`} 
+              href={`https://wa.me/7751599597?text=${whatsappMessage}`} 
               target="_blank" rel="noopener noreferrer"
               className="py-3 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-medium rounded-full text-sm transition-colors text-center cursor-pointer"
             >
